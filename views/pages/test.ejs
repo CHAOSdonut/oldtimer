@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <table>
+    <% data.forEach(function (i) { %>
+        <tr>
+            <td><%= i.HorlogeId %></td>
+            <td><%= i.StatusHorloge %></td>
+        </tr>
+    <% }) %>
+    </table>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../partials/head'); %>
+</head>
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location.href = $(this).data("href");
+        });
+    });
+</script>
+<body class="container">
+
+<header>
+    <%- include('../../partials/header'); %>
+</header>
+
+<div class="container-fluid">
+<div class="row">
+<%- include('../../partials/sidemenu'); %>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+    </div>
+    <div class="jumbotron">
+        <h3>Patienten:</h3>
+        <p>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Icare ID</th>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Leeftijd</th>
+                    <th scope="col">Horloge</th>
+                </tr>
+                <tbody>
+                    <% for(var i=0; i<data.length; i++) { %>
+                        <% let url = "patient/" + data[i].icareid %>
+                        <tr class='clickable-row' data-href=<%= url %>>
+                            <td><%= data[i].icareid %></td>
+                            <td><%= data[i].firstname %> <%= data[i].lastname %></td>
+                            <td><%= data[i].age %></td>
+                            <td><%= data[i].horlogeid %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </p>
+    </div>
+</main>
+
+</div>
+</div>
+<footer>
+    <%- include('../../partials/footer'); %>
+</footer>
+
+</body>
+</html>

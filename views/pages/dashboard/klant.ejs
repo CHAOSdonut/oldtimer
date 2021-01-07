@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../../partials/header'); %>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <%- include('../../partials/sidemenu'); %>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+            </div>
+            <div class="jumbotron">
+                <h3>Patient informatie:</h3>
+                <p>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Klant ID</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Leeftijd</th>
+                        <th scope="col">Horloge ID</th>
+                        <th scope="col">Horloge status</th>
+                    </tr>
+                    <% for(var i=0; i<data.length; i++) { %>
+                        <tr>
+                            <td><%= data[i].id %></td>
+                            <td><%= data[i].firstname %> <%= data[i].lastname %></td>
+                            <td><%= data[i].age %></td>
+                            <td><%= data[i].horlogeid %></td>
+                            <td><%= data[i].status %></td>
+                        </tr>
+                    <% } %>
+                </table>
+                </p>
+            </div>
+            <div class="jumbotron">
+                <h3>Location request:</h3>
+                <% if (data[0].locationid) { %>
+                    <p>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Request ID</th>
+                            <th scope="col">Latitude</th>
+                            <th scope="col">Longitude</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Map</th>
+                        </tr>
+                        <% for(var j=0; j<data.length; j++) { %>
+                            <%
+                                let location = JSON.parse(data[j].data);
+                                let mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + location.lat + "," + location.long;
+                            %>
+
+                            <tr>
+                                <td><%= data[j].locationid %></td>
+                                <td><%= location.lat %></td>
+                                <td><%= location.long %></td>
+                                <td><%= data[j].date.toLocaleString().split(',')[0] %></td>
+                                <td><%= data[j].time.split(':')[0] %>:<%= data[j].time.split(':')[1] %></td>
+                                <td><a href=<%= mapsUrl %> target="_blank">open map</a></td>
+                            </tr>
+                        <% } %>
+                    </table>
+                    </p>
+                <% } else { %>
+                    <p>No requests found.</p>
+                <% } %>
+            </div>
+        </main>
+
+    </div>
+</div>
+<footer>
+    <%- include('../../partials/footer'); %>
+</footer>
+
+</body>
+</html>
