@@ -75,7 +75,7 @@ router.get('/dashboard/horloges', function(req, res) {
 });
 
 router.post('/api' , function(req, res){
-    db.saveLocationReqeust().then(console.log("data saved"))
+    db.saveLocationReqeust(req.body).then(console.log("data saved"))
     .catch(e => console.log(e));
     console.log(req.body);
 });
